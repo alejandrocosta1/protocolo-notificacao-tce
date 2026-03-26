@@ -1,9 +1,5 @@
 # 🏛️ Protocolo de Notificação Eletrônica - TCE/CE
 
-[![Google Apps Script](https://img.shields.io/badge/Google%20Apps%20Script-4285F4?style=for-the-badge&logo=google-apps-script&logoColor=white)](https://developers.google.com/apps-script)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-
 Sistema desenvolvido para a **Secretaria de Serviços Processuais do Tribunal de Contas do Estado do Ceará (TCE/CE)**. O projeto automatiza a confirmação de ciência de notificações processuais enviadas via WhatsApp, conferindo agilidade e fé pública ao registro.
 
 ---
@@ -36,5 +32,4 @@ O sistema utiliza o ecossistema Google para garantir baixo custo de manutenção
 5. Realize o **Deploy** como "App da Web" com acesso para "Qualquer pessoa".
 
 ---
-### 👨‍💻 Autor
 **Alejandro Costa** *Estudante de Análise e Desenvolvimento de Sistemas* [LinkedIn](https://www.linkedin.com/in/www.linkedin.com/in/eualejandrocosta) 
