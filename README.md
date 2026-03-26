@@ -30,6 +30,3 @@ O sistema utiliza o ecossistema Google para garantir baixo custo de manutenção
 3. Insira o conteúdo de `Codigo.js` e crie um arquivo HTML chamado `Index.html`.
 4. Altere a variável `urlBaseOficial` no script para a URL gerada na implantação.
 5. Realize o **Deploy** como "App da Web" com acesso para "Qualquer pessoa".
-
----
-**Alejandro Costa** *Estudante de Análise e Desenvolvimento de Sistemas* [LinkedIn](https://www.linkedin.com/in/www.linkedin.com/in/eualejandrocosta) 
