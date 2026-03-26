@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+  :root { --cor-principal: #194383; --cor-texto: #333; --cor-borda: #ccc; --cor-cinza-suave: #666; }
+  body { font-family: Arial, sans-serif; background-color: #ffffff; margin: 0; padding: 0; }
+  
+  /* CABEÇALHO PARA WEB (DESKTOP) */
+  .topbar { 
+    background-color: var(--cor-principal); 
+    width: 100%; 
+    display: flex; 
+    flex-direction: row; /* Horizontal no Web */
+    align-items: center; 
+    justify-content: space-between; /* Logo esquerda, Texto direita */
+    padding: 12px 40px; 
+    box-sizing: border-box; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  }
+  .topbar img { height: 50px; filter: brightness(0) invert(1); }
+  .topbar-texto { color: #ffffff; font-weight: bold; font-size: 14px; text-transform: uppercase; text-align: right; }
+  
+  .wrap { max-width: 550px; margin: 20px auto; padding: 30px 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.12); border: 1px solid #ebebeb; box-sizing: border-box; }
+  
+  /* CABEÇALHO CENTRAL DENTRO DO FORMULÁRIO */
+  .cabecalho-central { text-align: center; margin-bottom: 25px; }
+  .cabecalho-central img { height: 120px; margin-bottom: 5px; } 
+  .cabecalho-central h1 { font-size: 18px; color: var(--cor-texto); margin: 0 0 10px 0; white-space: nowrap; }
+  
+  .status-valido { background-color: #e8f5e9; color: #2e7d32; padding: 15px; border-radius: 4px; border: 1px solid #c8e6c9; margin-bottom: 20px; font-weight: bold; font-size: 14px; }
+  
+  label { font-weight: bold; color: var(--cor-texto); display: block; margin-top: 15px; font-size: 13px; }       
+  input[type="text"] { width: 100%; padding: 12px; margin-top: 6px; border: 1px solid var(--cor-borda); border-radius: 4px; background-color: #f8f9fa; color: #495057; font-weight: bold; font-size: 15px; box-sizing: border-box; }
+  
+  .checkbox-group { margin-top: 25px; padding: 20px; background-color: #f8f9fa; border-left: 4px solid var(--cor-principal); border-radius: 4px; box-sizing: border-box; }
+  .checkbox-group label { font-size: 14px; color: #333; line-height: 1.5; display: flex; align-items: flex-start; margin-bottom: 15px; cursor: pointer; font-weight: bold; text-align: justify;}
+  .checkbox-group input[type="checkbox"] { margin-right: 12px; margin-top: 2px; flex-shrink: 0; width: 18px; height: 18px; }
+  
+  .btn-enviar { width: 100%; padding: 16px; background-color: var(--cor-principal); color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; margin-top: 25px; cursor: pointer; text-transform: uppercase; }
+  
+  .footer { text-align: center; font-size: 10px; color: var(--cor-cinza-suave); margin-top: 30px; padding: 20px 10px; border-top: 1px solid #eee; line-height: 1.7; }
+  .footer a { color: var(--cor-cinza-suave); text-decoration: underline; }
+  
+  /* AJUSTE AUTOMÁTICO PARA MOBILE */
+  @media (max-width: 600px) { 
+    .topbar { 
+      flex-direction: column; /* Empilha no celular */
+      padding: 15px; 
+      text-align: center;
+    }
+    .topbar-texto { text-align: center; margin-top: 8px; font-size: 12px; }
+    .topbar img { height: 45px; }
+    .wrap { margin: 15px; padding: 25px 15px; }
+    .cabecalho-central h1 { white-space: normal; font-size: 17px; } /* Permite quebrar linha só no mobile se precisar */
+  }
+</style>
+  </head>
+  <body>
+    <div class="topbar">
+      <img src="https://agora.tce.ce.gov.br/assets/layout/logos/logo_tce_branca_pt-440.png">
+      <div class="topbar-texto">Secretaria de Serviços Processuais</div>
+    </div>
+    <div class="wrap" id="telaPrincipal">
+      <div class="cabecalho-central">
+        <img src="https://www.tce.ce.gov.br/component/jdownloads/send/313-identidade-visual-tce-ceara/4299-logo-vertical-em-png">
+        <h1>Protocolo de Notificação Eletrônica</h1>
+        <? if (modoVisualizacao) { ?>
+          <div class="status-valido">✅ DOCUMENTO AUTENTICADO E VÁLIDO<br><span style="font-size: 11px; font-weight: normal;">Consulta de integridade pública realizada em: <?= dataHoraConsulta ?></span></div>
+        <? } else { ?>
+          <p style="font-size: 14px; color: #666; text-align: justify;">Este formulário constitui o registro de ciência inequívoca acerca das comunicações oficiais expedidas pela Secretaria de Serviços Processuais do TCE/CE, encaminhadas via aplicativo de mensagens (WhatsApp), para todos os efeitos legais e processuais.</p>
+        <? } ?>
+      </div>
+
+      <label>Nome:</label>
+      <input type="text" id="nome" value="<?= nome ?>" readonly>
+      <label>CPF:</label>
+      <input type="text" id="cpf" value="<?= cpf ?>" readonly>
+      <label>Contato (WhatsApp):</label>
+      <input type="text" id="whats" value="<?= whats ?>" readonly>
+      <label>Processo(s) nº(s):</label>
+      <input type="text" id="processo" value="<?= processo ?>" readonly>
+      <label>Ofício(s) nº(s):</label>
+      <input type="text" id="oficio" value="<?= oficio ?>" readonly>
+      <input type="hidden" id="link_acesso" value="<?= linkReal ?>">
+
+      <div class="checkbox-group">
+        <label><input type="checkbox" id="check1" <? if (modoVisualizacao) { ?> checked disabled <? } ?>> Confirmo a titularidade e a veracidade dos dados informados, declarando estar ciente da responsabilidade pelas informações prestadas.</label>
+        <label><input type="checkbox" id="check2" <? if (modoVisualizacao) { ?> checked disabled <? } ?>> Declaro, para os devidos fins, que recebi e tomei ciência do teor do(s) documento(s) e processo(s) supracitados, encaminhados via WhatsApp, estando ciente dos prazos e obrigações neles contidos.</label>
+      </div>
+
+      <? if (!modoVisualizacao) { ?>
+        <button class="btn-enviar" id="btnSalvar" onclick="enviarBanco()">CONFIRMAR CIÊNCIA</button>
+      <? } else { ?>
+        <p style="text-align:center; color:#333; font-size:12px; margin-top:20px; font-weight:bold;"><i>Este registro possui fé pública e está gravado nos servidores do TCE/CE.</i></p>
+        <p style="text-align:center; color:#999; font-size:11px; margin-top:-10px;">Registro oficial efetuado em: <?= dataHoraAssinaturaOriginal ?></p>
+      <? } ?>
+      
+      <div class="footer" id="rodapeComum">
+          Rua Sena Madureira, 1047 - CEP: 60055-080 - Fortaleza/CE<br>
+          Telefone: (85) 3125.8336 - Ouvidoria: (85) 3125.8334 e (85) 3125.8335 - <a href="https://www.tce.ce.gov.br" target="_blank">www.tce.ce.gov.br</a><br>
+          Horário de funcionamento: de segunda a sexta-feira, das 8 às 17 horas.
+      </div>
+    </div>
+
+    <script>
+      function enviarBanco() {
+        if(!document.getElementById("check1").checked || !document.getElementById("check2").checked) {
+          alert("Por favor, marque as caixas de confirmação."); return;
+        }
+        document.getElementById("btnSalvar").innerText = "REGISTRANDO...";
+        document.getElementById("btnSalvar").disabled = true;
+        
+        var dados = {
+          nome: document.getElementById("nome").value,
+          cpf: document.getElementById("cpf").value,
+          processo: document.getElementById("processo").value,
+          oficio: document.getElementById("oficio").value,
+          whatsMascarado: document.getElementById("whats").value,
+          link: document.getElementById("link_acesso").value
+        };
+
+        google.script.run.withSuccessHandler(function(r) {
+            var rodapeHtml = document.getElementById("rodapeComum").outerHTML;
+            if (r === "DUPLICADO") {
+              document.getElementById("telaPrincipal").innerHTML = 
+                "<div style='text-align:center; padding: 40px;'>" +
+                  "<h2 style='color:#d32f2f; margin-bottom: 15px;'>Registro de Ciência Já Formalizado!</h2>" +
+                  "<p style='color: #666; font-size: 14px;'>Informamos que já consta registro de resposta para este formulário, não sendo possível o envio de nova manifestação.</p>" +
+                  "<hr style='border: 0; border-top: 1px solid #eee; margin: 25px 0;'>" +
+                  "<p style='color: #999; font-size: 12px;'><i>Você já pode fechar esta aba.</i></p>" +
+                "</div>" + rodapeHtml;
+            } else {
+              var agora = new Date();
+              var dataF = agora.toLocaleDateString('pt-BR');
+              var horaF = agora.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+              
+              document.getElementById("telaPrincipal").innerHTML = 
+                "<div style='text-align:center; padding: 30px;'>" +
+                  "<h2 style='color:#2e7d32; margin-bottom: 10px;'>Registro Concluído!</h2>" +
+                  "<p style='color: #333; margin-bottom: 5px;'>Informamos que o registro de sua ciência foi realizado com êxito nos sistemas da Secretaria de Serviços Processuais do TCE/CE.</p>" +
+                  "<p style='color: #666; font-size: 14px;'>Em: " + dataF + " às " + horaF + "</p>" +
+                  "<div id='areaEmail' style='margin-top: 25px; padding: 20px; background-color: #f4f7f9; border: 1px solid #e1e4e8; border-radius: 12px;'>" +
+                    "<p style='font-size: 13px; color: #555; margin-bottom: 12px; font-weight: bold;'>Deseja receber o comprovante por e-mail?</p>" +
+                    "<input type='email' id='emailIn' placeholder='seu@email.com' style='width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; margin-bottom: 12px; font-size: 14px;'>" +
+                    "<button onclick='enviarEmail()' id='btnE' style='width: 100%; padding: 14px; background-color: #194383; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: bold; text-transform: uppercase;'>ENVIAR AGORA</button>" +
+                  "</div>" +
+                  "<hr style='border: 0; border-top: 1px solid #eee; margin: 25px 0;'>" +
+                  "<p style='color: #999; font-size: 12px;'><i>Você já pode fechar esta aba.</i></p>" +
+                "</div>" + rodapeHtml;
+
+                window.enviarEmail = function() {
+                  var email = document.getElementById('emailIn').value;
+                  if(!email || email.indexOf('@') === -1) { alert('Insira um e-mail válido.'); return; }
+                  document.getElementById('btnE').innerText = 'ENVIANDO...';
+                  google.script.run.withSuccessHandler(function() {
+                    document.getElementById('areaEmail').innerHTML = "<p style='color: #2e7d32; font-weight: bold;'>✅ Comprovante enviado com sucesso!</p>";
+                  }).enviarComprovanteEmail(email, dados);
+                };
+            }
+          }).salvarDados(dados);
+      }
+    </script>
+  </body>
+</html>
